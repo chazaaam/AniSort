@@ -107,24 +107,38 @@ namespace AniSort
             string destinationfile;
             string filename;
             string searchname;
+            int counter = 0;
+            int halflength;
 
             for(int i = 0; i < animelist.Count(); i++)
             {
                 filename = animelist[i];
                 filename = filename.Remove(0, filename.LastIndexOf("\\") + 1);
                 searchname  = filename.Remove(filename.LastIndexOf("."), 4);
-                searchname = searchname.Remove(searchname.Length / 2, searchname.Length / 2);
-                for(int j = 0; j < folderlist.Count(); j++)
+                halflength = searchname.Count() / 2;
+                if(searchname.Count() % 2 != 0)
+                    searchname = searchname.Remove(halflength, halflength + 1);
+                else
+                    searchname = searchname.Remove(halflength, halflength);
+
+                for (int j = 0; j < folderlist.Count(); j++)
                 {
                     if (folderlist[j].Contains(searchname))
                     {
-                        destinationfile = folderlist[i] + "\\"+ filename + ".txt";
+                        destinationfile = folderlist[j] + "\\"+ filename;
                         File.Move(animelist[i], destinationfile);
                         lst_animefiles.Items[i].BackColor = colorlist[j];
+                        counter++;
                     }
-                }
-                
+                }             
             }
+
+            if (counter == 0)
+                MessageBox.Show("No files moved");
+            else if (counter == 1)
+                MessageBox.Show("1 file succesfully moved into folder");
+            else
+                MessageBox.Show(counter + " files moved into folders");
         }
 
  
