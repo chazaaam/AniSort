@@ -59,11 +59,29 @@ namespace AniSort
             colorlist.Add(Color.Teal);
         }
 
-        private void txt_profile_Click(object sender, EventArgs e)
+        private void delete_data(bool folders, bool files)
+        {
+            if(folders && folderlist != null)
+            {              
+                lst_folders.Clear();
+                folderlist.Clear();
+                txt_location.Text = "";
+                location = null;
+            }
+            if(files && animelist != null)
+            {              
+                lst_animefiles.Clear();
+                animelist.Clear();
+            }
+        }
+
+        private void txt_location_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog chose_location = new FolderBrowserDialog();
 
             chose_location.Description = "Chose the location of your anime files";
+
+            delete_data(true, true);
 
             if(chose_location.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -86,6 +104,8 @@ namespace AniSort
 
         private void btn_read_Click(object sender, EventArgs e)
         {
+            delete_data(false, true);
+
             if (location != null)
             {
                 animelist = new List<string>();
@@ -115,6 +135,15 @@ namespace AniSort
                 filename = animelist[i];
                 filename = filename.Remove(0, filename.LastIndexOf("\\") + 1);
                 searchname  = filename.Remove(filename.LastIndexOf("."), 4);
+                if(searchname.Contains("[") && searchname.Contains("]"))
+                {
+                    searchname = searchname.Remove(searchname.IndexOf("["), searchname.IndexOf("]") + 1);
+                }
+                while(searchname.IndexOf(" ") == 0)
+                {
+                    searchname = searchname.Remove(0, 1);
+                }
+                MessageBox.Show(searchname);
                 halflength = searchname.Count() / 2;
                 if(searchname.Count() % 2 != 0)
                     searchname = searchname.Remove(halflength, halflength + 1);

@@ -60,7 +60,7 @@
             this.txt_location.ReadOnly = true;
             this.txt_location.Size = new System.Drawing.Size(487, 20);
             this.txt_location.TabIndex = 1;
-            this.txt_location.Click += new System.EventHandler(this.txt_profile_Click);
+            this.txt_location.Click += new System.EventHandler(this.txt_location_Click);
             // 
             // label1
             // 
