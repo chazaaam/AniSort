@@ -22,9 +22,15 @@ namespace AniSort
         public List<string> animelist;
         public List<string> folderlist;
         public List<Color> colorlist;
+        public string filetype;
+        public bool coloring;
 
         private void frm_main_Load(object sender, EventArgs e)
         {
+            
+
+            button1.Enabled = false;
+
             colorlist = new List<Color>();
             colorlist.Add(Color.Blue);
             colorlist.Add(Color.Red);
@@ -57,6 +63,8 @@ namespace AniSort
             colorlist.Add(Color.RosyBrown);
             colorlist.Add(Color.Sienna);
             colorlist.Add(Color.Teal);
+
+            set_data();
         }
 
         private void delete_data(bool folders, bool files)
@@ -77,6 +85,8 @@ namespace AniSort
 
         private void txt_location_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+
             FolderBrowserDialog chose_location = new FolderBrowserDialog();
 
             chose_location.Description = "Chose the location of your anime files";
@@ -88,39 +98,10 @@ namespace AniSort
                 location = chose_location.SelectedPath;
                 txt_location.Text = location;
 
-                folderlist = new List<string>();
-
-                foreach (string folders in Directory.GetDirectories(location))
-                {
-                    folderlist.Add(folders);
-                    lst_folders.Items.Add(folders);
-                }
-                for(int i = 0; i < folderlist.Count(); i++)
-                {
-                    lst_folders.Items[i].BackColor = colorlist[i];
-                }
+                search_folders();
             }
         }
 
-        private void btn_read_Click(object sender, EventArgs e)
-        {
-            delete_data(false, true);
-
-            if (location != null)
-            {
-                animelist = new List<string>();
-
-                foreach(string animefiles in Directory.GetFiles(location, "*.txt"))
-                {
-                    animelist.Add(animefiles);
-                    lst_animefiles.Items.Add(animefiles);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please chose a location");
-            }
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -143,7 +124,6 @@ namespace AniSort
                 {
                     searchname = searchname.Remove(0, 1);
                 }
-                MessageBox.Show(searchname);
                 halflength = searchname.Count() / 2;
                 if(searchname.Count() % 2 != 0)
                     searchname = searchname.Remove(halflength, halflength + 1);
@@ -156,7 +136,8 @@ namespace AniSort
                     {
                         destinationfile = folderlist[j] + "\\"+ filename;
                         File.Move(animelist[i], destinationfile);
-                        lst_animefiles.Items[i].BackColor = colorlist[j];
+                        if(coloring)
+                            lst_animefiles.Items[i].BackColor = colorlist[j];
                         counter++;
                     }
                 }             
@@ -170,6 +151,63 @@ namespace AniSort
                 MessageBox.Show(counter + " files moved into folders");
         }
 
- 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            frm_Settings settings_window = new frm_Settings();
+            settings_window.ShowDialog();
+
+            set_data();
+        }
+
+        private void set_data()
+        {
+            delete_data(true, true);
+            
+            txt_location.Text = Properties.Settings.Default.Location;
+            location = Properties.Settings.Default.Location;
+            filetype = Properties.Settings.Default.FileType;
+            coloring = Properties.Settings.Default.Coloring;
+
+            search_folders();
+        }
+
+        private void search_folders()
+        {
+            folderlist = new List<string>();
+
+            foreach (string folders in Directory.GetDirectories(location))
+            {
+                folderlist.Add(folders);
+                lst_folders.Items.Add(folders);
+            }
+
+            if (coloring)
+            {
+                for (int i = 0; i < folderlist.Count(); i++)
+                {
+                    lst_folders.Items[i].BackColor = colorlist[i];
+                }
+            }
+
+            if (location != null)
+            {
+                animelist = new List<string>();
+
+                foreach (string animefiles in Directory.GetFiles(location, "*" + filetype))
+                {
+                    string addfile;
+                    addfile = animefiles.Remove(0, animefiles.LastIndexOf("\\") + 1);
+                    animelist.Add(animefiles);
+                    lst_animefiles.Items.Add(addfile);
+                }
+
+                button1.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Please chose a location");
+            }
+            
+        }
     }
 }

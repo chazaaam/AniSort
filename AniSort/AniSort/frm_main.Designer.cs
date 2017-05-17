@@ -32,17 +32,23 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_location = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btn_read = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lst_animefiles = new System.Windows.Forms.ListView();
             this.lst_folders = new System.Windows.Forms.ListView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.txt_location);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -73,18 +79,6 @@
             this.label1.Text = "Location: ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btn_read
-            // 
-            this.btn_read.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_read.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_read.Location = new System.Drawing.Point(0, 30);
-            this.btn_read.Name = "btn_read";
-            this.btn_read.Size = new System.Drawing.Size(569, 40);
-            this.btn_read.TabIndex = 1;
-            this.btn_read.Text = "Search for files";
-            this.btn_read.UseVisualStyleBackColor = true;
-            this.btn_read.Click += new System.EventHandler(this.btn_read_Click);
-            // 
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -99,20 +93,21 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.lst_animefiles);
             this.panel2.Controls.Add(this.lst_folders);
+            this.panel2.Controls.Add(this.lst_animefiles);
+            this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 70);
+            this.panel2.Location = new System.Drawing.Point(0, 30);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(569, 334);
+            this.panel2.Size = new System.Drawing.Size(569, 374);
             this.panel2.TabIndex = 4;
             // 
             // lst_animefiles
             // 
             this.lst_animefiles.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lst_animefiles.Location = new System.Drawing.Point(271, 0);
+            this.lst_animefiles.Location = new System.Drawing.Point(280, 28);
             this.lst_animefiles.Name = "lst_animefiles";
-            this.lst_animefiles.Size = new System.Drawing.Size(298, 334);
+            this.lst_animefiles.Size = new System.Drawing.Size(289, 346);
             this.lst_animefiles.TabIndex = 5;
             this.lst_animefiles.UseCompatibleStateImageBehavior = false;
             this.lst_animefiles.View = System.Windows.Forms.View.List;
@@ -120,12 +115,59 @@
             // lst_folders
             // 
             this.lst_folders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lst_folders.Location = new System.Drawing.Point(0, 0);
+            this.lst_folders.Location = new System.Drawing.Point(0, 28);
             this.lst_folders.Name = "lst_folders";
-            this.lst_folders.Size = new System.Drawing.Size(569, 334);
+            this.lst_folders.Size = new System.Drawing.Size(280, 346);
             this.lst_folders.TabIndex = 4;
             this.lst_folders.UseCompatibleStateImageBehavior = false;
             this.lst_folders.View = System.Windows.Forms.View.List;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(569, 28);
+            this.panel3.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(281, 28);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Folders";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(280, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(289, 28);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Files";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pictureBox1.Image = global::AniSort.Properties.Resources.settings_512;
+            this.pictureBox1.InitialImage = global::AniSort.Properties.Resources.settings_512;
+            this.pictureBox1.Location = new System.Drawing.Point(536, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(33, 25);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // frm_main
             // 
@@ -134,7 +176,6 @@
             this.ClientSize = new System.Drawing.Size(569, 444);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.btn_read);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -145,6 +186,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -154,11 +197,14 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txt_location;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_read;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListView lst_folders;
         private System.Windows.Forms.ListView lst_animefiles;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
