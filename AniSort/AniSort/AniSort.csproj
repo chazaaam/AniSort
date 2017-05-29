@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="filter.ico" />
+    <None Include="Resources\neuladen.png" />
     <None Include="Resources\settings-512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

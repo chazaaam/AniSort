@@ -25,7 +25,7 @@ namespace AniSort.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\")]
         public string Location {
             get {
                 return ((string)(this["Location"]));
@@ -37,7 +37,7 @@ namespace AniSort.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".mkv")]
         public string FileType {
             get {
                 return ((string)(this["FileType"]));

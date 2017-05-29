@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="Location" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">C:\</Value>
     </Setting>
     <Setting Name="FileType" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">.mkv</Value>
     </Setting>
     <Setting Name="Coloring" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

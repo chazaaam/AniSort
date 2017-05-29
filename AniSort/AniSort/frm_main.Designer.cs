@@ -30,27 +30,32 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_main));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txt_location = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pic_neuladen = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lst_animefiles = new System.Windows.Forms.ListView();
             this.lst_folders = new System.Windows.Forms.ListView();
+            this.lst_animefiles = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_neuladen)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.txt_location);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.pic_neuladen);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -58,10 +63,31 @@
             this.panel1.Size = new System.Drawing.Size(569, 30);
             this.panel1.TabIndex = 0;
             // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(523, 5);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(13, 25);
+            this.panel4.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pictureBox1.Image = global::AniSort.Properties.Resources.settings_512;
+            this.pictureBox1.InitialImage = global::AniSort.Properties.Resources.settings_512;
+            this.pictureBox1.Location = new System.Drawing.Point(536, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(33, 25);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // txt_location
             // 
             this.txt_location.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txt_location.Location = new System.Drawing.Point(70, 5);
+            this.txt_location.Location = new System.Drawing.Point(103, 5);
             this.txt_location.Name = "txt_location";
             this.txt_location.ReadOnly = true;
             this.txt_location.Size = new System.Drawing.Size(487, 20);
@@ -72,12 +98,25 @@
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Left;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 5);
+            this.label1.Location = new System.Drawing.Point(38, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 25);
             this.label1.TabIndex = 2;
             this.label1.Text = "Location: ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pic_neuladen
+            // 
+            this.pic_neuladen.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pic_neuladen.Image = global::AniSort.Properties.Resources.neuladen;
+            this.pic_neuladen.InitialImage = global::AniSort.Properties.Resources.settings_512;
+            this.pic_neuladen.Location = new System.Drawing.Point(5, 5);
+            this.pic_neuladen.Name = "pic_neuladen";
+            this.pic_neuladen.Size = new System.Drawing.Size(33, 25);
+            this.pic_neuladen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_neuladen.TabIndex = 4;
+            this.pic_neuladen.TabStop = false;
+            this.pic_neuladen.Click += new System.EventHandler(this.pic_neuladen_Click);
             // 
             // button1
             // 
@@ -102,16 +141,6 @@
             this.panel2.Size = new System.Drawing.Size(569, 374);
             this.panel2.TabIndex = 4;
             // 
-            // lst_animefiles
-            // 
-            this.lst_animefiles.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lst_animefiles.Location = new System.Drawing.Point(280, 28);
-            this.lst_animefiles.Name = "lst_animefiles";
-            this.lst_animefiles.Size = new System.Drawing.Size(289, 346);
-            this.lst_animefiles.TabIndex = 5;
-            this.lst_animefiles.UseCompatibleStateImageBehavior = false;
-            this.lst_animefiles.View = System.Windows.Forms.View.List;
-            // 
             // lst_folders
             // 
             this.lst_folders.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -122,6 +151,16 @@
             this.lst_folders.UseCompatibleStateImageBehavior = false;
             this.lst_folders.View = System.Windows.Forms.View.List;
             // 
+            // lst_animefiles
+            // 
+            this.lst_animefiles.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lst_animefiles.Location = new System.Drawing.Point(280, 28);
+            this.lst_animefiles.Name = "lst_animefiles";
+            this.lst_animefiles.Size = new System.Drawing.Size(289, 346);
+            this.lst_animefiles.TabIndex = 5;
+            this.lst_animefiles.UseCompatibleStateImageBehavior = false;
+            this.lst_animefiles.View = System.Windows.Forms.View.List;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label3);
@@ -131,18 +170,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(569, 28);
             this.panel3.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(281, 28);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Folders";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -156,18 +183,17 @@
             this.label3.Text = "Files";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
+            // label2
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox1.Image = global::AniSort.Properties.Resources.settings_512;
-            this.pictureBox1.InitialImage = global::AniSort.Properties.Resources.settings_512;
-            this.pictureBox1.Location = new System.Drawing.Point(536, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(33, 25);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(281, 28);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Folders";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frm_main
             // 
@@ -185,9 +211,10 @@
             this.Load += new System.EventHandler(this.frm_main_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_neuladen)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -205,6 +232,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pic_neuladen;
+        private System.Windows.Forms.Panel panel4;
     }
 }
 

@@ -63,6 +63,16 @@ namespace AniSort.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap neuladen {
+            get {
+                object obj = ResourceManager.GetObject("neuladen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap settings_512 {
             get {
                 object obj = ResourceManager.GetObject("settings-512", resourceCulture);

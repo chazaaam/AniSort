@@ -209,5 +209,10 @@ namespace AniSort
             }
             
         }
+
+        private void pic_neuladen_Click(object sender, EventArgs e)
+        {
+            set_data();
+        }
     }
 }
