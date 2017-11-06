@@ -73,8 +73,6 @@ namespace AniSort
             {              
                 lst_folders.Items.Clear();
                 folderlist.Clear();
-                txt_location.Text = "";
-                location = null;
             }
             if(files && animelist != null)
             {
@@ -99,7 +97,7 @@ namespace AniSort
                 location = chose_location.SelectedPath;
                 txt_location.Text = location;
 
-                search_folders();
+                search_folders(true, true);
             }
         }
 
@@ -161,7 +159,8 @@ namespace AniSort
             }
 
 
-            set_data();
+            delete_data(false, true);
+            search_folders(false, true);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -181,48 +180,52 @@ namespace AniSort
             filetype = Properties.Settings.Default.FileType;
             coloring = Properties.Settings.Default.Coloring;
 
-            search_folders();
+            search_folders(true, true);
         }
 
-        private void search_folders()
+        private void search_folders(bool foldersearch, bool filesearch)
         {
-            folderlist = new List<string>();
-
-            foreach (string folders in Directory.GetDirectories(location))
+            if (foldersearch)
             {
-                string foldername;
-                foldername = folders.Remove(0, folders.LastIndexOf("\\") + 1);
-                folderlist.Add(folders);
-                lst_folders.Items.Add(foldername);
-            }
+                folderlist = new List<string>();
 
-           /* if (coloring)
-            {
-                for (int i = 0; i < folderlist.Count(); i++)
+                foreach (string folders in Directory.GetDirectories(location))
                 {
-                    lst_folders.Items[i].BackColor = colorlist[i];
+                    string foldername;
+                    foldername = folders.Remove(0, folders.LastIndexOf("\\") + 1);
+                    folderlist.Add(folders);
+                    lst_folders.Items.Add(foldername);
                 }
             }
-            */
-            if (location != null)
+            /* if (coloring)
+             {
+                 for (int i = 0; i < folderlist.Count(); i++)
+                 {
+                     lst_folders.Items[i].BackColor = colorlist[i];
+                 }
+             }
+             */
+            if (filesearch)
             {
-                animelist = new List<string>();
-
-                foreach (string animefiles in Directory.GetFiles(location, "*" + filetype))
+                if (location != null)
                 {
-                    string addfile;
-                    addfile = animefiles.Remove(0, animefiles.LastIndexOf("\\") + 1);
-                    animelist.Add(animefiles);
-                    lst_animefiles.Items.Add(addfile);
-                }
+                    animelist = new List<string>();
 
-                button1.Enabled = true;
+                    foreach (string animefiles in Directory.GetFiles(location, "*" + filetype))
+                    {
+                        string addfile;
+                        addfile = animefiles.Remove(0, animefiles.LastIndexOf("\\") + 1);
+                        animelist.Add(animefiles);
+                        lst_animefiles.Items.Add(addfile);
+                    }
+
+                    button1.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Please chose a location");
+                }
             }
-            else
-            {
-                MessageBox.Show("Please chose a location");
-            }
-            
         }
 
         private void pic_neuladen_Click(object sender, EventArgs e)
@@ -277,14 +280,15 @@ namespace AniSort
                     }
                 }
 
-
-                set_data();
+                delete_data(false, true);
+                search_folders(false, true);
+                
             }
         }
 
         private void inMarkiertenOrdnerVerschiebenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(lst_folders.SelectedIndex != -1)
+            if(lst_folders.SelectedIndex != -1 && lst_animefiles.SelectedIndex != -1)
             {
                 string destinationfile;
                 int folderindex = lst_folders.SelectedIndex;
@@ -304,7 +308,123 @@ namespace AniSort
                 }
             }
 
-            set_data();
+            delete_data(false, true);
+            search_folders(false, true);
+        }
+
+        private void namenÄndernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lst_animefiles.SelectedIndex != -1)
+            {
+                int animeindex = lst_animefiles.SelectedIndex;
+
+                string filename = animelist[animeindex];
+
+                string destinationfile = animelist[animeindex].Remove(0, animelist[animeindex].LastIndexOf("\\") + 1);
+                string path = animelist[animeindex].Remove(animelist[animeindex].LastIndexOf("\\") + 1);
+
+                DialogResult inputchange = ShowInputDialog(ref destinationfile);               
+
+                try
+                {        
+                    if(inputchange == DialogResult.OK)
+                        File.Move(filename, path + destinationfile);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                delete_data(false, true);
+                search_folders(false, true);
+            }
+        }
+
+        private static DialogResult ShowInputDialog(ref string input)
+        {
+            System.Drawing.Size size = new System.Drawing.Size(200, 70);
+            Form inputBox = new Form();
+
+            inputBox.StartPosition = FormStartPosition.Manual;
+
+            inputBox.Location = new Point(MousePosition.X, MousePosition.Y);
+
+            inputBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            inputBox.MaximizeBox = false;
+            inputBox.MinimizeBox = false;
+            inputBox.ClientSize = size;
+            inputBox.Text = "";
+
+            System.Windows.Forms.TextBox textBox = new TextBox();
+            textBox.Size = new System.Drawing.Size(size.Width - 10, 23);
+            textBox.Location = new System.Drawing.Point(5, 5);
+            textBox.Text = input;
+            inputBox.Controls.Add(textBox);
+
+            Button okButton = new Button();
+            okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new System.Drawing.Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new System.Drawing.Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            DialogResult result = inputBox.ShowDialog();
+            input = textBox.Text;
+            return result;
+        }
+
+        private void lst_folders_MouseDown(object sender, MouseEventArgs e)
+        {
+            lst_folders.SelectedIndex = lst_folders.IndexFromPoint(e.X, e.Y);
+        }
+
+        private void toolStripMenuItemEntfernen_Click(object sender, EventArgs e)
+        {
+            if (lst_folders.SelectedIndex != -1)
+            {
+                int folderindex = lst_folders.SelectedIndex;
+
+                folderlist.RemoveAt(folderindex);
+                lst_folders.Items.RemoveAt(folderindex);
+            }
+        }
+
+        private void toolStripMenuItemÄndern_Click(object sender, EventArgs e)
+        {
+            if (lst_folders.SelectedIndex != -1)
+            {
+                int folderindex = lst_folders.SelectedIndex;
+
+                string foldername = folderlist[folderindex];
+
+                string destinationfolder = folderlist[folderindex].Remove(0, folderlist[folderindex].LastIndexOf("\\") + 1);
+                string path = folderlist[folderindex].Remove(folderlist[folderindex].LastIndexOf("\\") + 1);
+                ShowInputDialog(ref destinationfolder);
+
+                try
+                {
+                    Directory.Move(foldername, path + destinationfolder);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                delete_data(true, false);
+                search_folders(true, false);
+            }
         }
     }
 }

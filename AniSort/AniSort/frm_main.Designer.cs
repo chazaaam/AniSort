@@ -32,10 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_main));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txt_location = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pic_neuladen = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lst_animefiles = new System.Windows.Forms.ListBox();
@@ -48,12 +46,19 @@
             this.filler = new System.Windows.Forms.Panel();
             this.lst_folders = new System.Windows.Forms.ListBox();
             this.inMarkiertenOrdnerVerschiebenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.namenÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pic_neuladen = new System.Windows.Forms.PictureBox();
+            this.contextMenuStripFolders = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemEntfernen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemÄndern = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_neuladen)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.contextMenuStripFiles.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_neuladen)).BeginInit();
+            this.contextMenuStripFolders.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -78,20 +83,6 @@
             this.panel4.Size = new System.Drawing.Size(13, 25);
             this.panel4.TabIndex = 5;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pictureBox1.Image = global::AniSort.Properties.Resources.settings_512;
-            this.pictureBox1.InitialImage = global::AniSort.Properties.Resources.settings_512;
-            this.pictureBox1.Location = new System.Drawing.Point(531, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(33, 25);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // txt_location
             // 
             this.txt_location.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -113,20 +104,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Location: ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pic_neuladen
-            // 
-            this.pic_neuladen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pic_neuladen.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pic_neuladen.Image = ((System.Drawing.Image)(resources.GetObject("pic_neuladen.Image")));
-            this.pic_neuladen.InitialImage = global::AniSort.Properties.Resources.settings_512;
-            this.pic_neuladen.Location = new System.Drawing.Point(5, 5);
-            this.pic_neuladen.Name = "pic_neuladen";
-            this.pic_neuladen.Size = new System.Drawing.Size(36, 25);
-            this.pic_neuladen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_neuladen.TabIndex = 4;
-            this.pic_neuladen.TabStop = false;
-            this.pic_neuladen.Click += new System.EventHandler(this.pic_neuladen_Click);
             // 
             // button1
             // 
@@ -201,21 +178,22 @@
             this.contextMenuStripFiles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AusListeEntfernenToolStripMenuItem,
             this.inMarkiertenOrdnerVerschiebenToolStripMenuItem,
-            this.manuellZuordnenToolStripMenuItem});
+            this.manuellZuordnenToolStripMenuItem,
+            this.namenÄndernToolStripMenuItem});
             this.contextMenuStripFiles.Name = "contextMenuStripFiles";
             this.contextMenuStripFiles.Size = new System.Drawing.Size(251, 92);
             // 
             // AusListeEntfernenToolStripMenuItem
             // 
             this.AusListeEntfernenToolStripMenuItem.Name = "AusListeEntfernenToolStripMenuItem";
-            this.AusListeEntfernenToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.AusListeEntfernenToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.AusListeEntfernenToolStripMenuItem.Text = "Aus Liste entfernen";
             this.AusListeEntfernenToolStripMenuItem.Click += new System.EventHandler(this.AusListeEntfernenToolStripMenuItem_Click);
             // 
             // manuellZuordnenToolStripMenuItem
             // 
             this.manuellZuordnenToolStripMenuItem.Name = "manuellZuordnenToolStripMenuItem";
-            this.manuellZuordnenToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.manuellZuordnenToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.manuellZuordnenToolStripMenuItem.Text = "Manuell zuordnen";
             this.manuellZuordnenToolStripMenuItem.Click += new System.EventHandler(this.manuellZuordnenToolStripMenuItem_Click);
             // 
@@ -229,12 +207,14 @@
             // 
             // lst_folders
             // 
+            this.lst_folders.ContextMenuStrip = this.contextMenuStripFolders;
             this.lst_folders.Dock = System.Windows.Forms.DockStyle.Left;
             this.lst_folders.FormattingEnabled = true;
             this.lst_folders.Location = new System.Drawing.Point(0, 28);
             this.lst_folders.Name = "lst_folders";
             this.lst_folders.Size = new System.Drawing.Size(281, 341);
             this.lst_folders.TabIndex = 7;
+            this.lst_folders.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lst_folders_MouseDown);
             // 
             // inMarkiertenOrdnerVerschiebenToolStripMenuItem
             // 
@@ -242,6 +222,63 @@
             this.inMarkiertenOrdnerVerschiebenToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
             this.inMarkiertenOrdnerVerschiebenToolStripMenuItem.Text = "In markierten Ordner verschieben";
             this.inMarkiertenOrdnerVerschiebenToolStripMenuItem.Click += new System.EventHandler(this.inMarkiertenOrdnerVerschiebenToolStripMenuItem_Click);
+            // 
+            // namenÄndernToolStripMenuItem
+            // 
+            this.namenÄndernToolStripMenuItem.Name = "namenÄndernToolStripMenuItem";
+            this.namenÄndernToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.namenÄndernToolStripMenuItem.Text = "Namen ändern";
+            this.namenÄndernToolStripMenuItem.Click += new System.EventHandler(this.namenÄndernToolStripMenuItem_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pictureBox1.Image = global::AniSort.Properties.Resources.settings_512;
+            this.pictureBox1.InitialImage = global::AniSort.Properties.Resources.settings_512;
+            this.pictureBox1.Location = new System.Drawing.Point(531, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(33, 25);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // pic_neuladen
+            // 
+            this.pic_neuladen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pic_neuladen.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pic_neuladen.Image = ((System.Drawing.Image)(resources.GetObject("pic_neuladen.Image")));
+            this.pic_neuladen.InitialImage = global::AniSort.Properties.Resources.settings_512;
+            this.pic_neuladen.Location = new System.Drawing.Point(5, 5);
+            this.pic_neuladen.Name = "pic_neuladen";
+            this.pic_neuladen.Size = new System.Drawing.Size(36, 25);
+            this.pic_neuladen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_neuladen.TabIndex = 4;
+            this.pic_neuladen.TabStop = false;
+            this.pic_neuladen.Click += new System.EventHandler(this.pic_neuladen_Click);
+            // 
+            // contextMenuStripFolders
+            // 
+            this.contextMenuStripFolders.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemEntfernen,
+            this.toolStripMenuItemÄndern});
+            this.contextMenuStripFolders.Name = "contextMenuStripFiles";
+            this.contextMenuStripFolders.Size = new System.Drawing.Size(176, 70);
+            // 
+            // toolStripMenuItemEntfernen
+            // 
+            this.toolStripMenuItemEntfernen.Name = "toolStripMenuItemEntfernen";
+            this.toolStripMenuItemEntfernen.Size = new System.Drawing.Size(175, 22);
+            this.toolStripMenuItemEntfernen.Text = "Aus Liste entfernen";
+            this.toolStripMenuItemEntfernen.Click += new System.EventHandler(this.toolStripMenuItemEntfernen_Click);
+            // 
+            // toolStripMenuItemÄndern
+            // 
+            this.toolStripMenuItemÄndern.Name = "toolStripMenuItemÄndern";
+            this.toolStripMenuItemÄndern.Size = new System.Drawing.Size(175, 22);
+            this.toolStripMenuItemÄndern.Text = "Namen ändern";
+            this.toolStripMenuItemÄndern.Click += new System.EventHandler(this.toolStripMenuItemÄndern_Click);
             // 
             // frm_main
             // 
@@ -260,11 +297,12 @@
             this.Load += new System.EventHandler(this.frm_main_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_neuladen)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.contextMenuStripFiles.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_neuladen)).EndInit();
+            this.contextMenuStripFolders.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -289,6 +327,10 @@
         private System.Windows.Forms.Panel filler;
         private System.Windows.Forms.ListBox lst_folders;
         private System.Windows.Forms.ToolStripMenuItem inMarkiertenOrdnerVerschiebenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem namenÄndernToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripFolders;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEntfernen;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemÄndern;
     }
 }
 
